@@ -9,7 +9,6 @@ C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-window
 C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-windows\App.g.cs
 C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-windows\HPCInterview_MarkupCompile.cache
-C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-windows\HPCInterview_MarkupCompile.lref
 C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-windows\HPCInterview.g.resources
 C:\Users\Nicholas\source\repos\HPCInterview\HPCInterview\obj\Debug\net5.0-windows\HPCInterview.GeneratedMSBuildEditorConfig.editorconfig

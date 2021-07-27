@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace HPCInterview
@@ -13,6 +12,7 @@ namespace HPCInterview
         {
             InitializeComponent();
 
+            //On start disable all text boxes, and buttons except the submit button
             editButton.IsEnabled = false;
             deleteButton.IsEnabled = false;
             submitButton.IsEnabled = false;
@@ -30,6 +30,7 @@ namespace HPCInterview
 
             setEnableAddEditDeleteButtons(false);
             setEnableSubmitCancelButtons(true);
+            setEnableShipListView(false);
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
@@ -38,13 +39,14 @@ namespace HPCInterview
 
             setEnableAddEditDeleteButtons(false);
             setEnableSubmitCancelButtons(true);
+            setEnableShipListView(false);
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
             //Prompt user before deleting
             ShipSpec selectedShip = (ShipSpec)shipsListView.Items[shipsListView.SelectedIndex];
-            string promptMessage = "Are you sure you want to delete the ship " + selectedShip.Name + " (" + selectedShip.Code + ")?";
+            string promptMessage = "Are you sure you want to delete the ship: " + selectedShip.Name + " (" + selectedShip.Code + ")?";
 
             MessageBoxResult result = MessageBox.Show(promptMessage, "Confirm Ship Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -91,6 +93,7 @@ namespace HPCInterview
             handleAddEditDeleteAfterSubmitOrCancel();
             setEnableTextBoxes(false);
             setEnableSubmitCancelButtons(false);
+            setEnableShipListView(true);
         }
 
         private void shipsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -99,10 +102,7 @@ namespace HPCInterview
             {
                 ShipSpec selectedShip = (ShipSpec)shipsListView.Items[shipsListView.SelectedIndex];
 
-                shipNameTextBox.Text = selectedShip.Name;
-                shipCodeTextBox.Text = selectedShip.Code;
-                lengthTextBox.Text = selectedShip.Length.ToString();
-                widthTextBox.Text = selectedShip.Width.ToString();
+                setTextBoxes(selectedShip);
             }
             else
             {
@@ -117,17 +117,23 @@ namespace HPCInterview
                 clearTextBoxes();
 
                 //Select the first item in the list (if one exists) if we decide to not add a new ship
-                shipsListView.SelectedIndex = shipsListView.Items.Count > 0 ? 0 : -1;
+                shipsListView.SelectedIndex = shipsListView.Items.Count > 0 ? 0 : -1; 
+            }
+
+            if(shipsListView.SelectedIndex > -1)
+            {
+                setTextBoxes((ShipSpec)shipsListView.Items[shipsListView.SelectedIndex]);
             }
 
             setEnableTextBoxes(false);
             handleAddEditDeleteAfterSubmitOrCancel();
             setEnableSubmitCancelButtons(false);
+            setEnableShipListView(true);
         }
 
         #endregion
 
-        #region Control Enable/Disable Logic 
+        #region Textbox setting/clearing
 
         private void clearTextBoxes()
         {
@@ -136,6 +142,18 @@ namespace HPCInterview
             widthTextBox.Clear();
             lengthTextBox.Clear();
         }
+
+        private void setTextBoxes(ShipSpec ship)
+        {
+            shipNameTextBox.Text = ship.Name;
+            shipCodeTextBox.Text = ship.Code;
+            lengthTextBox.Text = ship.Length.ToString();
+            widthTextBox.Text = ship.Width.ToString();
+        }
+
+        #endregion
+
+        #region Control Enable/Disable Logic 
 
         private void setEnableTextBoxes(bool enable)
         {
@@ -156,6 +174,11 @@ namespace HPCInterview
         {
             submitButton.IsEnabled = enable;
             cancelButton.IsEnabled = enable;
+        }
+
+        private void setEnableShipListView(bool enable)
+        {
+            shipsListView.IsEnabled = enable;
         }
 
         private void handleAddEditDeleteAfterSubmitOrCancel()
@@ -199,7 +222,7 @@ namespace HPCInterview
             {
                 errorMessages += "Please enter a valid ship code.\n";
             }
-            else if(shipCodeExists(shipCodeTextBox.Text))
+            else if(shipCodeExists(shipCodeTextBox.Text.ToUpper()))
             {
                 errorMessages += "Ship code already exists.\n";
             }

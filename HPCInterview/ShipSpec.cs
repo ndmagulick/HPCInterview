@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return Code + ", " + Name;
+            return Code + ", " + Name + ", " + Length + "m x " + Width + "m";
         }
     }
 }

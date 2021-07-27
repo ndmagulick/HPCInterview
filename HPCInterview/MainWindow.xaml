@@ -3,15 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HPCInterview"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="750"
-        Background="WhiteSmoke">
+        Title="HPC Interview" 
+        Height="380" 
+        Width="500"
+        Background="WhiteSmoke"
+        ResizeMode="NoResize">
     
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -22,92 +23,86 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="shipsListViewTextBlock" 
-                   Grid.Column="1" 
-                   Grid.Row="1" 
-                   Text="Ships"/>
+        <StackPanel  Grid.Column="1" 
+                     Grid.Row="1">
+            <TextBlock x:Name="shipsListViewTextBlock" 
+                       Text="Ships"/>
 
-        <ListView x:Name="shipsListView" 
-                  Grid.Column="1" 
-                  Grid.Row="2" 
-                  Height="auto" 
-                  Width="250" 
-                  Grid.RowSpan="5"
-                  SelectionChanged="shipsListView_SelectionChanged" />
+            <ListView x:Name="shipsListView" 
+                      Height="292"
+                      Width="275"
+                      SelectionChanged="shipsListView_SelectionChanged" />
+        </StackPanel>
 
-        <GroupBox Grid.Column="2" 
-                  Grid.Row="1" 
-                  Grid.RowSpan="6" 
+
+        <StackPanel Grid.Column="2"
+                    Grid.Row="1"
+                    Margin="10,0">
+            <GroupBox Grid.Column="2" 
+                  Grid.Row="1"
                   VerticalAlignment="Top"
-                  Header="Ship Information" 
-                  Margin="10,0">
-            <StackPanel>
-                
-                <TextBlock x:Name="shipNameTextBlock" 
-                           Text="Ship Name" />
-                <TextBox x:Name="shipNameTextBox" 
-                         Width="150"/>
+                  Header="Ship Information">
+                <StackPanel>
 
-                <TextBlock x:Name="shipCodeTextBlock" 
-                           Text="Ship Code"/>
-                <TextBox x:Name="shipCodeTextBox" 
+                    <TextBlock x:Name="shipNameTextBlock" 
+                               Text="Ship Name" />
+                    <TextBox x:Name="shipNameTextBox" 
+                             Width="150"/>
+
+                    <TextBlock x:Name="shipCodeTextBlock" 
+                           Text="Ship Code"
+                               TextDecorations="Underline"
+                           ToolTip="Ship codes must be of the following format: AAAA-1111-A1 where A is any letter of the alphabet, and 1 is any number 0-9"/>
+                    <TextBox x:Name="shipCodeTextBox" 
                          Width="150" 
                          MaxLength="12"/>
 
-                <TextBlock x:Name="lengthTextBlock" 
+                    <TextBlock x:Name="lengthTextBlock" 
                            Text="Length (Meters)"/>
-                <TextBox x:Name="lengthTextBox" 
+                    <TextBox x:Name="lengthTextBox" 
                          Width="30" 
                          HorizontalAlignment="Left" 
                          PreviewTextInput="numberValidation"/>
 
-                <TextBlock x:Name="widthTextBlock" 
+                    <TextBlock x:Name="widthTextBlock" 
                            Text="Width (Meters)"/>
-                <TextBox x:Name="widthTextBox" 
+                    <TextBox x:Name="widthTextBox" 
                          Width="30" 
                          HorizontalAlignment="Left" 
                          PreviewTextInput="numberValidation"/>
-                
-            </StackPanel>
-        </GroupBox>
 
-        <Button x:Name="addButton" 
-                Grid.Column="4" 
-                Grid.Row="1" 
+                </StackPanel>
+            </GroupBox>
+
+            <Button x:Name="addButton"
                 Content="Add Ship"
+                Margin="10,10"
                 Click="addButton_Click"/>
-        
-        <Button x:Name="editButton" 
-                Grid.Column="4" 
-                Grid.Row="2" 
-                Margin="0,5"
-                Content="Edit Ship" 
+
+            <Button x:Name="editButton" 
+                Content="Edit Ship"
+                Margin="10,0"
                 Click="editButton_Click" />
-        
-        <Button x:Name="deleteButton" 
-                Grid.Column="4" 
-                Grid.Row="3" 
+
+            <Button x:Name="deleteButton" 
                 Content="Delete Ship" 
+                Margin="10,10"
                 Click="deleteButton_Click"/>
-        
-        <Button x:Name="submitButton" 
-                Grid.Column="4" 
-                Grid.Row="4" 
+
+            <Button x:Name="submitButton"
                 Content="Submit" 
-                Margin="0,5"
+                Margin="10,0"
                 Click="submitButton_Click"/>
-        
-        <Button x:Name="cancelButton" 
-                Grid.Column="4" 
-                Grid.Row="5" 
-                Content="Cancel" 
+
+            <Button x:Name="cancelButton"
+                Content="Cancel"
+                Margin="10,10"
                 Click="cancelButton_Click"/>
+        </StackPanel>
+
     </Grid>
 </Window>
